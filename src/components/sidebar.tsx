@@ -4,7 +4,7 @@ export default function Sidebar ()  {
     return (
     <div className="flex flex-col bg-gray-100">
       <div className="flex flex-col items-center bg-yellow-200 w-64 h-full py-8 px-4 shadow-lg">
-        <h2 className="text-3xl font-bold mb-8">MANAGE COURSES</h2>
+        <h2 className="text-xl font-bold mb-8">MANAGE COURSES</h2>
         <div className="flex flex-col items-center mb-8">
           <img
             src="https://via.placeholder.com/100"

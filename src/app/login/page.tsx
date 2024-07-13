@@ -34,7 +34,7 @@ export default function LoginPage () {
 
     return <div className="min-h-screen flex items-center justify-center bg-yellow-300">
       <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
-        <h2 className="text-3xl font-bold text-center mb-4">MANAGE COURSES</h2>
+        <h2 className="text-xl font-bold text-center mb-4">MANAGE COURSES</h2>
         <p className="text-center text-gray-600 mb-8">Enter your credentials to access your account</p>
         <form onSubmit={handleSubmit(submitForm)}>
           <div className="mb-4">
@@ -71,8 +71,9 @@ export default function LoginPage () {
             SIGN IN
           </button>
           <div className="text-center mt-4">
-            <a href="#" className="text-yellow-600 hover:text-yellow-800 transition duration-300">
-              Forgot your password? <span className="font-semibold">Reset Password</span>
+            <a href="#" >
+              <span className="text-yellow-400 hover:text-yellow-600 transition duration-300">Forgot your password? </span>
+              <span className="text-yellow-600 hover:underline">Reset Password</span>
             </a>
           </div>
         </form>
