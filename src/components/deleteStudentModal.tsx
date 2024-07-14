@@ -1,36 +1,25 @@
 "use client";
-import { faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import axios from "axios";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogHeader,
-  DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-
 import { Student, StudentSchema } from "./addNewStudentModal";
-import { useState } from "react";
 import { useToast } from "./ui/use-toast";
-import axios from "axios";
 
 interface DeleteStudentModal {
   id: number;
 }
-
 export function DeleteStudentModal({ id }: DeleteStudentModal) {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const form = useForm<Student>({ resolver: zodResolver(StudentSchema) });
