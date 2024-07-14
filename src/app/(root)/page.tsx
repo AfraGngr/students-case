@@ -1,6 +1,6 @@
 export default function Home() {
 return (
-    <div className="h-screen w-screen">
+    <div className="h-screen w-full">
       <main className="p-8 bg-gray-100 h-full">
         <div className="grid grid-cols-4 gap-6">
           <div className="bg-blue-100 p-6 rounded-lg shadow-md flex flex-col items-center">
