@@ -14,7 +14,7 @@ import {
   FormItem,
   FormMessage,
 } from "@/components/ui/form";
-import { AddNewStudentModal } from "./addNewUserModal";
+import { AddNewStudentModal } from "./addNewStudentModal";
 
 const SearchSchema = z.object({
   search: z

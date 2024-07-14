@@ -1,11 +1,9 @@
 "use client";
-
+import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useToast } from "@/components/ui/use-toast";
 
-import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -21,53 +19,41 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import axios, { AxiosInstance, AxiosRequestConfig } from "axios";
-import { Phone } from "lucide-react";
+import { Button } from "@/components/ui/button";
+
+import { Student, StudentSchema } from "./addNewStudentModal";
 import { useState } from "react";
-import { revalidatePath } from "next/cache";
+import { useToast } from "./ui/use-toast";
+import axios from "axios";
 
-const UserSchema = z.object({
-  firstName: z
-    .string()
-    .min(3, { message: "First name should be at least 3 char" }),
-  lastName: z
-    .string()
-    .min(2, { message: "Last name should be at least 3 char" }),
-  email: z.string().email(),
-  phone: z.string(),
-});
+interface EditStudentProps {
+  data: User;
+  id: number;
+}
 
-type Student = z.infer<typeof UserSchema>;
-
-export function AddNewStudentModal() {
+export function EditStudentModal({ data, id }: EditStudentProps) {
+  const { firstName, lastName, email, phone } = data;
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const form = useForm<Student>({ resolver: zodResolver(UserSchema) });
+  const form = useForm<Student>({ resolver: zodResolver(StudentSchema) });
   const { toast } = useToast();
 
   const submitForm = async (data: Student) => {
     try {
       const config = {
-        method: "POST",
-        url: "https://dummyjson.com/users/add",
-        body: {
-          firstName: data.firstName,
-          lastName: data.lastName,
-          email: data.email,
-          phone: data.phone,
-        },
+        method: "PUT",
+        url: `https://dummyjson.com/users/${id}`,
+        body: data,
       };
 
       await axios(config);
+      setIsModalOpen(false);
       toast({
-        title: "New student added successfully !",
+        title: "Student was edited successfully !",
         className: "bg-gray-100 text-green-600",
       });
-      setIsModalOpen(false);
-      form.reset();
     } catch (err: any) {
-      console.log(err);
       toast({
-        title: "An error occured while adding new student.",
+        title: "An error occured while editing the student.",
         className: "bg-gray-100 text-rose-600",
       });
     }
@@ -75,23 +61,19 @@ export function AddNewStudentModal() {
 
   return (
     <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-      <DialogTrigger asChild>
-        <Button
-          onClick={() => setIsModalOpen(true)}
-          className="bg-orange-400 text-gray-50"
-        >
-          + Add New Student
-        </Button>
+      <DialogTrigger>
+        <FontAwesomeIcon color="orange" icon={faPenToSquare} />
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px] bg-gray-200">
+      <DialogContent className="bg-gray-200">
         <DialogHeader>
-          <DialogTitle>Enter User Info</DialogTitle>
+          <DialogTitle>Edit Student</DialogTitle>
         </DialogHeader>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(submitForm)} className="space-y-8">
             <FormField
               control={form.control}
               name="firstName"
+              defaultValue={firstName}
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
@@ -104,6 +86,7 @@ export function AddNewStudentModal() {
             <FormField
               control={form.control}
               name="lastName"
+              defaultValue={lastName}
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
@@ -116,6 +99,7 @@ export function AddNewStudentModal() {
             <FormField
               control={form.control}
               name="email"
+              defaultValue={email}
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
@@ -128,6 +112,7 @@ export function AddNewStudentModal() {
             <FormField
               control={form.control}
               name="phone"
+              defaultValue={phone}
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
@@ -138,7 +123,7 @@ export function AddNewStudentModal() {
               )}
             />
             <Button type="submit" className="w-full bg-orange-400 text-gray-50">
-              Add Student
+              Edit Student
             </Button>
           </form>
         </Form>
