@@ -1,3 +1,4 @@
+import { DeleteStudentModal } from "./deleteStudentModal";
 import { EditStudentModal } from "./editStudentModal";
 
 interface UserCardProps {
@@ -30,7 +31,7 @@ export default function UserCard({ user, key }: UserCardProps) {
       </div>
       <div className="flex items-center w-1/12">
         <EditStudentModal data={user} id={user.id} />
-        {/* <FontAwesomeIcon color="orange" className="mr-3" icon={faTrash} /> */}
+        <DeleteStudentModal id={user.id} />
       </div>
     </div>
   );

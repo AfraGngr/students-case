@@ -61,8 +61,8 @@ export function EditStudentModal({ data, id }: EditStudentProps) {
 
   return (
     <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-      <DialogTrigger>
-        <FontAwesomeIcon color="orange" icon={faPenToSquare} />
+      <DialogTrigger className="mr-3">
+        <FontAwesomeIcon color="green" icon={faPenToSquare} />
       </DialogTrigger>
       <DialogContent className="bg-gray-200">
         <DialogHeader>
