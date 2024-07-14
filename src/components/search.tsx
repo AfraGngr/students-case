@@ -1,53 +1,65 @@
-'use client'
+"use client";
 
-import { SubmitHandler, useForm } from "react-hook-form"
-import { z } from 'zod'
+import { SubmitHandler, useForm } from "react-hook-form";
+import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 
+import { Input } from "@/components/ui/input";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormMessage,
+} from "@/components/ui/form";
+import { AddNewStudentModal } from "./addNewUserModal";
+
 const SearchSchema = z.object({
-    search: z.string().regex(/^[A-Za-z]+$/, "Search input should only include letters")
-})
+  search: z
+    .string()
+    .regex(/^[A-Za-z]+$/, "Search input should only include letters"),
+});
 
-type SearchType = z.infer<typeof SearchSchema>
+type SearchType = z.infer<typeof SearchSchema>;
 export default function Search() {
-    const { 
-        register,
-        handleSubmit,
-        formState: { errors }
-    } = useForm<SearchType>({ resolver: zodResolver(SearchSchema)})
+  const form = useForm<SearchType>({ resolver: zodResolver(SearchSchema) });
 
-    const pathname = usePathname();
-    const searchParams = useSearchParams();
-    const router = useRouter()
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const router = useRouter();
 
-    const submitForm: SubmitHandler<SearchType> = (data) => {
-        const params = new URLSearchParams(searchParams);
-        params.set('page', '1');
-        params.set('q', data.search)
-        router.push(`${pathname}?${params.toString()}`);
-    }
+  const submitForm: SubmitHandler<SearchType> = (data) => {
+    console.log(data);
+    const params = new URLSearchParams(searchParams);
+    params.set("page", "1");
+    params.set("q", data.search);
+    router.push(`${pathname}?${params.toString()}`);
+  };
 
-    const addNewStudent = () => {
-        
-    }
-
-
-    return <div className="w-full flex justify-between items-center">
-        <div>{"Student's Table"}</div>
-        <div className="w-1/3 justify-around flex p-2">
-        <form onSubmit={handleSubmit(submitForm)}>
-            <input 
-                defaultValue={searchParams.get('q') || ''}
-                type="text"
-                id="name"
-                placeholder="Search..." 
-                className="border rounded-md h-full focus:border-gray-300 focus:border-1 focus:outline-none "
-                {...register("search")}
+  return (
+    <div className="w-full flex justify-between items-center">
+      <div>{"Student's Table"}</div>
+      <div className="w-1/3 justify-around flex p-2">
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(submitForm)} className="space-y-8">
+            <FormField
+              control={form.control}
+              name="search"
+              render={({ field }) => (
+                <FormItem>
+                  <FormControl>
+                    <Input placeholder="Search.." {...field} />
+                  </FormControl>
+                  <FormMessage className="text-rose-500 text-xs" />
+                </FormItem>
+              )}
             />
-        </form>
-            <button className="bg-orange-400 p-2 w-1/2 border text-gray-50 rounded">+ Add New Student</button>
-        </div>
+          </form>
+        </Form>
+        <AddNewStudentModal />
+      </div>
     </div>
+  );
 }

@@ -29,9 +29,6 @@ export default async function Students ({ searchParams }: SearchParams) {
     
     const { data } = await axios<GetStudentResponse>(config)
     const total = data.total
-    
-    console.log({page, skip, q, limit: data.limit})
-
 
     return <div className="flex p-5 flex-col gap-2 justify-between">
         <Search />
