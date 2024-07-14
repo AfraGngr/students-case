@@ -6,16 +6,16 @@ interface IStudentProps {
 export default function StudentsTable({ data }: IStudentProps) {
 
     return (
-        <div className="p-5">
+        <div className="">
         <div
             className="p-2 w-full flex justify-between"
             >
-            <div className="w-1/12 " ></div>
-            <div className="w-2/12" >Name</div>
-            <div className="w-2/12">Email</div>
-            <div className="w-2/12">Phone</div>
-            <div className="w-2/12">Website</div>
-            <div className="w-2/12"></div>
+            <div className="text-gray-500 w-1/12 " ></div>
+            <div className="text-gray-500 w-2/12" >Name</div>
+            <div className="text-gray-500 w-3/12">Email</div>
+            <div className="text-gray-500 w-2/12">Phone</div>
+            <div className="text-gray-500 w-3/12">Website</div>
+            <div className="text-gray-500 w-1/12"></div>
             </div>
              <div
             className="w-full flex flex-col gap-2 items-center justify-center"
