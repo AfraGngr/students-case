@@ -8,7 +8,7 @@ import Link from "next/link";
 
 export default function Sidebar() {
   return (
-    <div className="flex flex-col bg-orange-50 w-64 h-full py-8 px-4 shadow-lg">
+    <div className="flex flex-col bg-orange-50 w-72 h-full py-8 px-4 shadow-lg">
       <h2 className="text-xl font-bold mb-8">MANAGE COURSES</h2>
       <div className="flex flex-col items-center mb-8">
         <img

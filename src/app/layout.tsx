@@ -1,13 +1,10 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
 
-const inter = Inter({ subsets: ["latin"] });
+import { Montserrat } from "next/font/google";
 
-import { Roboto } from "next/font/google";
-
-const roboto = Roboto({
+const montserrat = Montserrat({
   weight: "400",
   subsets: ["latin"],
   display: "swap",
@@ -25,7 +22,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
+      <body className={montserrat.className}>
         {children}
         <Toaster />
       </body>

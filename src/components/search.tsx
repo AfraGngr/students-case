@@ -40,7 +40,7 @@ export default function Search() {
 
   return (
     <div className="w-full flex justify-between items-center">
-      <div>{"Student's Table"}</div>
+      <div className="text-xl font-bold">{"Student's Table"}</div>
       <div className="w-1/3 justify-around flex p-2">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(submitForm)} className="space-y-8">
